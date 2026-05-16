@@ -21,7 +21,8 @@ export default function MembersPanel({ project, canManage }) {
     }
   }, [canManage, dispatch, users.length]);
 
-  const memberIds = new Set(project.members.map((m) => m.user_id));
+  const members = project.members ?? [];
+  const memberIds = new Set(members.map((m) => m.user_id));
   const candidates = users.filter((u) => !memberIds.has(u.id));
 
   const handleAdd = async () => {
@@ -48,10 +49,10 @@ export default function MembersPanel({ project, canManage }) {
     <Card>
       <h3 className="text-base font-semibold text-slate-800">Team</h3>
       <p className="mt-0.5 text-xs text-slate-500">
-        {project.members.length} {project.members.length === 1 ? 'member' : 'members'}
+        {members.length} {members.length === 1 ? 'member' : 'members'}
       </p>
       <ul className="mt-4 space-y-2">
-        {project.members.map((m) => (
+        {members.map((m) => (
           <li
             key={m.user_id}
             className="flex items-center justify-between gap-2 rounded-lg border border-slate-100 bg-slate-50 px-3 py-2"

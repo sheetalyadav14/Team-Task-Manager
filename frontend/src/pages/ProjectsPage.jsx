@@ -79,8 +79,8 @@ export default function ProjectsPage() {
               <div className="mt-4 flex items-center gap-1 text-xs text-slate-500">
                 <Users size={12} />
                 <span>
-                  {project.members.length}{' '}
-                  {project.members.length === 1 ? 'member' : 'members'}
+                  {project.members?.length ?? 0}{' '}
+                  {(project.members?.length ?? 0) === 1 ? 'member' : 'members'}
                 </span>
               </div>
             </Link>
