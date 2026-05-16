@@ -111,7 +111,7 @@ const projectsSlice = createSlice({
       })
       .addCase(fetchProjects.fulfilled, (state, action) => {
         state.loading = false;
-        state.list = action.payload;
+        state.list = Array.isArray(action.payload) ? action.payload : [];
       })
       .addCase(fetchProjects.rejected, (state, action) => {
         state.loading = false;

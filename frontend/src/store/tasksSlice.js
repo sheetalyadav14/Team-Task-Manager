@@ -99,14 +99,15 @@ const tasksSlice = createSlice({
       })
       .addCase(fetchTasksForProject.fulfilled, (state, action) => {
         state.loading = false;
-        state.byProject[action.payload.projectId] = action.payload.tasks;
+        const tasks = action.payload.tasks;
+        state.byProject[action.payload.projectId] = Array.isArray(tasks) ? tasks : [];
       })
       .addCase(fetchTasksForProject.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || 'Failed to load tasks';
       })
       .addCase(fetchMyTasks.fulfilled, (state, action) => {
-        state.mine = action.payload;
+        state.mine = Array.isArray(action.payload) ? action.payload : [];
       })
       .addCase(fetchTaskStats.fulfilled, (state, action) => {
         state.stats = action.payload;
